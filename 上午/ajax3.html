@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 600px;
+      height: 500px;
+      margin: 50px auto;
+    }
+
+    .conteiner-one {
+      width: 150px;
+      height: 200px;
+      float: left;
+      margin-left: 36px;
+      margin-bottom: 10px;
+    }
+    img{
+      width: 150px;
+      height: 150px;
+    }
+    .text {
+      font-size: 15px;
+    }
+
+    .text1 {
+      color: orange;
+    }
+
+    .text2 {
+      color: aqua;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <button id="btn">点击</button>
+  <div class="container">
+     <!-- <img src="" alt="">
+     <div class="text">
+         <p class="text1"></p>
+         <p class="text2"></p>
+     </div> -->
+  </div>
+  <script src="./ajax.js"></script>
+  <script>
+   var btn=document.getElementsByTagName("button")[0];
+   var container=document.getElementsByClassName("container")[0]
+   btn.onclick=function(){
+    container.innerHTML=""
+     ajax("./data-1.json",function(str){
+         var obj=JSON.parse(str)
+        //  console.log(obj)
+        for(var i=0;i<obj.length;i++){
+           var data=obj[i]
+           var conteinerOne=document.createElement("div");
+           conteinerOne.className="conteiner-one";
+           conteinerOne.innerHTML=
+           `
+           <img src="${data.coverImg}" alt="">
+            <div class="text">
+                <p class="text1">${data.storyOne}</p>
+                <p class="text2">${data.storyTwo}</p>
+            </div>
+           `
+           container.appendChild(conteinerOne)
+        }
+     },function(){
+       console.log("数据获取失败"+oAjax.status)
+     })
+   }
+  </script>
+</body>
+
+</html>

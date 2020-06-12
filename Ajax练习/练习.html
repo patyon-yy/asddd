@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .box-z {
+            width: 600px;
+            /* height: 500px; */
+            background: yellow;
+            margin: 0 auto;
+        }
+
+        .box-z li {
+            width: 197px;
+            height: 200px;
+            /* background: red; */
+            float: left;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .box-z h3 {
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .box-z p {
+            display: block;
+            font-size: 9px;
+            color: #333333;
+        }
+
+        .box-z img {
+            display: block;
+            width: 197px;
+            height: 130px;
+        }
+
+        ul {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <button>加载</button>
+    <div class="box">
+        <div class="box-z">
+            <!-- <ul></ul> -->
+            <!-- <li>
+                <img src="" alt="">
+                <h3>胜林三境重装出发</h3>
+                <p>2016-02-03 15:23:56.0</p>
+                <p>小鸟掌学创建于2014年初，起源服务于四川</p>
+                <p>省专业技术人员继续教育基地的在线培训平台</p>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+        </div>
+    </div>
+    <script src="ajax.js"></script>
+    <script>
+        var boxz = document.getElementsByClassName("box-z")[0]
+        var btn = document.getElementsByTagName("button")[0]
+        // var oul=document.getElementsByTagName("ul")[0]
+        var num = 0
+        btn.onclick = function () {
+            num++
+            if (num > 0 && num <= 2) {
+                loch()
+            }
+        }
+        
+        function loch() {
+            ajax("./listData.json", function (str) {
+                var obj = JSON.parse(str);
+                var list = obj[num].data.list
+                for (var a = 0; a < list.length; a++) {
+                    var ooli = document.createElement("li")
+                    ooli.innerHTML = `
+                       <img src="${list[a].coverImg}" alt="">
+                    <h3>${list[a].title}</h3>
+                    <p>${list[a].creatAt}</p>
+                    <p>${list[a].describe}/p>
+                       `
+                    boxz.appendChild(ooli)
+                }
+            })
+        }
+
+        loch()
+
+
+
+        // for(var a=0;a<aa.length;a++){
+        //                var ooli=document.createElement("li")
+        //                ooli.innerHTML=`
+        //                <img src="${aa[a].coverImg}" alt="">
+        //             <h3>${aa[a].title}</h3>
+        //             <p>${aa[a].creatAt}</p>
+        //             <p>${aa[a].describe}/p>
+
+        //                `
+        //                boxz.appendChild(ooli)
+
+
+        //               }
+    </script>
+</body>
+
+</html>

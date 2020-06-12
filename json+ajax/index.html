@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/css.css" />
+
+</head>
+
+<body>
+    <div class="box">
+        <div class="left">
+            <p data_name="woxihuan">我喜欢</p>
+            <p data_name="bendixiazai">本地下载</p>
+            <p data_name="bofanglishi">播放历史</p>
+            <p data_name="shitingliebiao">试听列表</p>
+        </div>
+
+        <div class="right">
+            <div class="r_top">
+                <img id="img" src="img/woxihuan.jpg" />
+            </div>
+            <ul class="r_bottom">
+                <!-- <li>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="./ajax.js"></script>
+    <!-- <script src="js/js.js"></script> -->
+    <script>
+        var left = document.getElementsByClassName("left")[0]
+        var right = document.getElementsByClassName("right")[0]
+        var rtop = document.getElementsByClassName("r_top")[0]
+        var rbto = document.getElementsByClassName("r_bottom")[0]
+        var pp = left.getElementsByTagName("p")
+        var oImg = document.getElementById("img")
+
+        // for (let i = 0; i < pp.length; i++) {
+        //     pp[i].index = i
+        //     pp[i].onclick = function () {
+        //         rbto.innerHTML = ``
+        //         var index = this.index
+        //         if (index == 3) {
+        //             rbto.innerHTML = `没有数据`
+        //         } else {
+        //             ajax("./js/package.json", function (str) {
+        //                 var obj = JSON.parse(str)
+        //                 var img = obj[index].img
+        //                 oImg.src = img
+        //                 var list = obj[index].list
+        //                 for (let i = 0; i < list.length; i++) {
+        //                     var ooli = document.createElement("li")
+        //                     ooli.innerHTML = `
+        //                    <p>${list[i].geming}</p>
+        //                    <p>${list[i].geshou}</p>
+        //                    <p>${list[i].chuchu}</p>
+        //                    `
+        //                    rbto.appendChild(ooli)
+        //                 }
+        //             })
+        //         }
+        //     }
+
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ajax("./js/package.json", function (str) {
+            var obj = JSON.parse(str)
+
+            for (var i = 0; i < obj.length; i++) {
+
+                for (var c = 0; c < pp.length; c++) {
+                    pp[c].index = c
+                    pp[c].onclick = function () {
+                        rbto.innerHTML = ``
+                    rtop.innerHTML=`
+                    <img id="img" src="${obj[this.index].img}" />
+                    `
+                    var list=obj[this.index].list
+                    console.log(list)
+                    for(var d=0;d<list.length;d++){
+                   var ooli=document.createElement("li")
+                   ooli.innerHTML=`
+                   <p>${list[d].geming}</p>
+                           <p>${list[d].geshou}</p>
+                           <p>${list[d].chuchu}</p>
+                   `
+                   rbto.appendChild(ooli)
+                    }
+
+                    }
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
